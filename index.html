@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>STUDIO.NOVA — Creative Designer &amp; Developer</title>
+    <meta
+      name="description"
+      content="Creative Designer & Developer building immersive digital experiences."
+    />
+    <meta name="theme-color" content="#030305" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="STUDIO.NOVA — Creative Designer & Developer" />
+    <meta
+      property="og:description"
+      content="Immersive websites, interactive 3D and motion — designed and built with care."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts: Outfit + Inter + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <script>
+      // Flag JS support early so the intro states apply before first paint.
+      document.documentElement.classList.replace("no-js", "js");
+      // Fail-safe: if the app never boots, reveal the page anyway.
+      window.__bootTimer = setTimeout(function () {
+        document.documentElement.classList.add("is-ready", "boot-failed");
+      }, 8000);
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ============================== Preloader ============================== -->
+    <div class="preloader" aria-hidden="true">
+      <div class="preloader__center">
+        <svg class="preloader__cube" viewBox="0 0 100 100" fill="none">
+          <path class="pc-back" d="M32 14 H86 V68 H32 Z" />
+          <path class="pc-link" d="M14 32 L32 14 M68 32 L86 14 M68 86 L86 68 M14 86 L32 68" />
+          <path class="pc-front" d="M14 32 H68 V86 H14 Z" />
+        </svg>
+        <p class="preloader__brand">
+          <span class="pl-word">STUDIO</span><span class="pl-dot">.</span><span class="pl-word">NOVA</span>
+        </p>
+      </div>
+      <div class="preloader__bottom">
+        <p class="preloader__label">
+          <span class="preloader__label-line">Loading experience</span>
+          <span class="preloader__label-line">Creative Designer &amp; Developer</span>
+        </p>
+        <div class="preloader__count"><span class="js-preloader-count">0</span><sup>%</sup></div>
+      </div>
+      <div class="preloader__bar"><span></span></div>
+    </div>
+
+    <!-- WebGL world (fixed, behind the content) -->
+    <canvas class="webgl" aria-hidden="true"></canvas>
+
+    <!-- Custom cursor -->
+    <div class="cursor" aria-hidden="true">
+      <div class="cursor__ring"><span class="cursor__label"></span></div>
+      <div class="cursor__dot"></div>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+    <!-- ============================== Header ============================== -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Primary">
+        <a href="#home" class="logo" data-intro="nav" aria-label="STUDIO.NOVA — back to top">
+          <i class="ph ph-cube-transparent" aria-hidden="true"></i>
+          <span>STUDIO.NOVA</span>
+        </a>
+
+        <ul class="nav-links" data-intro="nav">
+          <li><a href="#home" class="nav-link active" data-nav="home">Home</a></li>
+          <li><a href="#work" class="nav-link" data-nav="work">Work</a></li>
+          <li><a href="#about" class="nav-link" data-nav="about">About</a></li>
+          <li><a href="#services" class="nav-link" data-nav="services">Services</a></li>
+          <li><a href="#contact" class="nav-link" data-nav="contact">Contact</a></li>
+          <li class="nav-indicator" aria-hidden="true"></li>
+        </ul>
+
+        <div class="nav-actions" data-intro="nav">
+          <a href="#contact" class="btn btn-outline" data-magnetic>
+            <span class="btn__text" data-text="Let’s Work Together"><span>Let&rsquo;s Work Together</span></span>
+          </a>
+        </div>
+
+        <button
+          class="mobile-menu-toggle"
+          data-intro="nav"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <span class="burger" aria-hidden="true"><span></span><span></span></span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu__bg"></div>
+      <nav class="mobile-menu__nav" aria-label="Mobile">
+        <ul>
+          <li><a href="#home" class="mm-link"><span class="mm-num">01</span><span class="mm-text">Home</span></a></li>
+          <li><a href="#work" class="mm-link"><span class="mm-num">02</span><span class="mm-text">Work</span></a></li>
+          <li><a href="#about" class="mm-link"><span class="mm-num">03</span><span class="mm-text">About</span></a></li>
+          <li><a href="#services" class="mm-link"><span class="mm-num">04</span><span class="mm-text">Services</span></a></li>
+          <li><a href="#contact" class="mm-link"><span class="mm-num">05</span><span class="mm-text">Contact</span></a></li>
+        </ul>
+      </nav>
+      <div class="mobile-menu__footer">
+        <a href="mailto:hello@studionova.example" class="mobile-menu__email">hello@studionova.example</a>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+          <a href="#" class="social-link" aria-label="X / Twitter"><i class="ph ph-x-logo"></i></a>
+          <a href="#" class="social-link" aria-label="Dribbble"><i class="ph ph-dribbble-logo"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <main id="main">
+      <!-- ============================== Hero ============================== -->
+      <section class="hero-section" id="home" data-section="home" aria-label="Introduction">
+        <!-- Background video -->
+        <div class="video-container">
+          <div class="video-zoom">
+            <div class="video-parallax">
+              <video
+                id="heroVideo"
+                class="hero-video"
+                autoplay
+                muted
+                playsinline
+                preload="auto"
+                poster="/hero-poster.webp"
+              >
+                <source
+                  src="https://strvid.nyc3.cdn.digitaloceanspaces.com/cloudinary/portfolio_hero_bg_zuhahj.webm"
+                  type="video/webm"
+                />
+              </video>
+            </div>
+          </div>
+          <div class="video-overlay"></div>
+          <div class="video-flash" aria-hidden="true"></div>
+        </div>
+
+        <!-- Hero center content -->
+        <div class="hero-content">
+          <div class="hero-text">
+            <p class="greeting" data-intro="greeting">Hello, I&rsquo;m</p>
+            <h1 class="main-title" data-intro="title">
+              Creative Designer<br />
+              <span class="amp">&amp;</span> Developer
+            </h1>
+            <p class="sub-title" data-intro="subtitle">
+              <span class="grad-text">I build</span>
+              <span class="word-rotator" aria-hidden="true">
+                <span class="word-rotator__item grad-text">immersive</span>
+                <span class="word-rotator__item grad-text">interactive</span>
+                <span class="word-rotator__item grad-text">unforgettable</span>
+                <span class="word-rotator__item grad-text">award&#8209;worthy</span>
+              </span>
+              <span class="sr-only">immersive</span>
+              <span class="grad-text">digital experiences</span>
+            </p>
+            <div class="cta-group" data-intro="cta">
+              <a href="#work" class="btn btn-primary" data-magnetic>
+                <span class="btn__text" data-text="View My Work"><span>View My Work</span></span>
+                <i class="ph ph-arrow-down-right" aria-hidden="true"></i>
+              </a>
+              <!-- Replace "#" with the path to your CV, e.g. "/cv.pdf" (put the file in /public). -->
+              <a href="#" class="btn btn-outline" data-magnetic>
+                <span class="btn__text" data-text="Download CV"><span>Download CV</span></span>
+                <i class="ph ph-download-simple" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero footer -->
+        <div class="hero-footer">
+          <div class="footer-left">
+            <div class="availability-card glass" data-intro="footer">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <div class="availability-text">
+                <p class="availability-title">Available for Work</p>
+                <p class="availability-sub">Open to freelance &amp; full-time roles</p>
+              </div>
+            </div>
+
+            <div class="stats-group" data-intro="footer">
+              <div class="stat">
+                <span class="stat-number" data-count="8" data-suffix="+">8+</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <span class="stat-line" aria-hidden="true"></span>
+              <div class="stat">
+                <span class="stat-number" data-count="120" data-suffix="+">120+</span>
+                <span class="stat-label">Projects</span>
+              </div>
+              <span class="stat-line" aria-hidden="true"></span>
+              <div class="stat">
+                <span class="stat-number" data-count="40" data-suffix="+">40+</span>
+                <span class="stat-label">Clients</span>
+              </div>
+            </div>
+
+            <div class="social-links" data-intro="footer">
+              <a href="#" class="social-link" aria-label="GitHub" data-magnetic><i class="ph ph-github-logo"></i></a>
+              <a href="#" class="social-link" aria-label="LinkedIn" data-magnetic><i class="ph ph-linkedin-logo"></i></a>
+              <a href="#" class="social-link" aria-label="X / Twitter" data-magnetic><i class="ph ph-x-logo"></i></a>
+              <a href="#" class="social-link" aria-label="Dribbble" data-magnetic><i class="ph ph-dribbble-logo"></i></a>
+            </div>
+          </div>
+
+          <div class="scroll-indicator" aria-hidden="true" data-intro="footer">
+            <div class="mouse">
+              <div class="wheel"></div>
+            </div>
+            <span class="scroll-text">Scroll</span>
+          </div>
+        </div>
+
+        <!-- Revealed at the end of the scroll "dive" into the monitor -->
+        <div class="hero-intro" aria-hidden="true">
+          <p class="hero-intro__eyebrow">Welcome to my universe</p>
+          <p class="hero-intro__title">
+            <span class="hi-line"><span>Where design, code</span></span>
+            <span class="hi-line"><span>&amp; <em>motion</em> collide.</span></span>
+          </p>
+          <p class="hero-intro__hint"><i class="ph ph-arrow-down"></i> Keep scrolling</p>
+        </div>
+      </section>
+
+      <!-- ============================== Work ============================== -->
+      <section class="work" id="work" data-section="work" aria-labelledby="work-title">
+        <div class="work__pin">
+          <div class="work__track">
+            <div class="work__intro">
+              <p class="eyebrow" data-reveal="fade"><span class="eyebrow__num">01</span>Selected Work</p>
+              <h2 class="section-title" id="work-title" data-reveal="chars">
+                Featured<br /><em>Projects</em>
+              </h2>
+              <p class="section-lead" data-reveal="fade">
+                A curated selection of immersive websites, interactive experiences and digital
+                products &mdash; each one crafted from the first sketch to the final pixel.
+              </p>
+              <div class="work__meta" data-reveal="fade">
+                <span class="work__counter"><span class="js-work-current">01</span> / 05</span>
+                <span class="work__progress" aria-hidden="true"><span></span></span>
+              </div>
+              <p class="work__hint" data-reveal="fade">
+                <i class="ph ph-mouse-scroll" aria-hidden="true"></i> Scroll to explore
+              </p>
+            </div>
+
+            <!-- Projects: swap the copy & links for your own case studies -->
+            <article class="project-card" style="--accent-a: #8a63f8; --accent-b: #4de1ff">
+              <a href="#" class="project-card__link" data-cursor="View">
+                <div class="project-card__media" data-scene="nebula">
+                  <span class="project-card__year">2026</span>
+                </div>
+                <div class="project-card__info">
+                  <span class="project-card__num">01</span>
+                  <div class="project-card__body">
+                    <h3 class="project-card__title">Nebula</h3>
+                    <p class="project-card__desc">
+                      Immersive WebGL launch experience for a next-generation audio brand.
+                    </p>
+                  </div>
+                  <ul class="project-card__tags">
+                    <li>WebGL</li>
+                    <li>Three.js</li>
+                    <li>GLSL</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+
+            <article class="project-card" style="--accent-a: #5a8cff; --accent-b: #c9c3ff">
+              <a href="#" class="project-card__link" data-cursor="View">
+                <div class="project-card__media" data-scene="orbit">
+                  <span class="project-card__year">2025</span>
+                </div>
+                <div class="project-card__info">
+                  <span class="project-card__num">02</span>
+                  <div class="project-card__body">
+                    <h3 class="project-card__title">Orbit</h3>
+                    <p class="project-card__desc">
+                      Real-time fintech dashboard with 3D data storytelling and live market feeds.
+                    </p>
+                  </div>
+                  <ul class="project-card__tags">
+                    <li>React</li>
+                    <li>Three.js</li>
+                    <li>D3</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+
+            <article class="project-card" style="--accent-a: #ff5fd2; --accent-b: #8a63f8">
+              <a href="#" class="project-card__link" data-cursor="View">
+                <div class="project-card__media" data-scene="prism">
+                  <span class="project-card__year">2025</span>
+                </div>
+                <div class="project-card__info">
+                  <span class="project-card__num">03</span>
+                  <div class="project-card__body">
+                    <h3 class="project-card__title">Prism</h3>
+                    <p class="project-card__desc">
+                      Modular brand identity and design system for an independent creative agency.
+                    </p>
+                  </div>
+                  <ul class="project-card__tags">
+                    <li>Branding</li>
+                    <li>Figma</li>
+                    <li>Motion</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+
+            <article class="project-card" style="--accent-a: #ff4f9a; --accent-b: #ffb46b">
+              <a href="#" class="project-card__link" data-cursor="View">
+                <div class="project-card__media" data-scene="wave">
+                  <span class="project-card__year">2024</span>
+                </div>
+                <div class="project-card__info">
+                  <span class="project-card__num">04</span>
+                  <div class="project-card__body">
+                    <h3 class="project-card__title">Waveform</h3>
+                    <p class="project-card__desc">
+                      Audio-reactive festival experience powered by a generative visual system.
+                    </p>
+                  </div>
+                  <ul class="project-card__tags">
+                    <li>Web Audio</li>
+                    <li>GLSL</li>
+                    <li>GSAP</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+
+            <article class="project-card" style="--accent-a: #4de1ff; --accent-b: #8a63f8">
+              <a href="#" class="project-card__link" data-cursor="View">
+                <div class="project-card__media" data-scene="helix">
+                  <span class="project-card__year">2024</span>
+                </div>
+                <div class="project-card__info">
+                  <span class="project-card__num">05</span>
+                  <div class="project-card__body">
+                    <h3 class="project-card__title">Helix</h3>
+                    <p class="project-card__desc">
+                      Interactive data platform that brings genomic research to life in the browser.
+                    </p>
+                  </div>
+                  <ul class="project-card__tags">
+                    <li>Next.js</li>
+                    <li>WebGL</li>
+                    <li>UX</li>
+                  </ul>
+                </div>
+              </a>
+            </article>
+
+            <div class="work__end">
+              <a href="#contact" class="work__end-cta" data-magnetic data-cursor="Let’s talk">
+                <span class="work__end-text">Your project<br />could be next</span>
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== About ============================== -->
+      <section class="about" id="about" data-section="about" aria-labelledby="about-title">
+        <div class="container about__grid">
+          <div class="about__content">
+            <p class="eyebrow" data-reveal="fade"><span class="eyebrow__num">02</span>About Me</p>
+            <h2 class="about__statement" id="about-title" data-scrub-words>
+              I&rsquo;m a creative designer and developer who turns bold ideas into immersive,
+              interactive experiences &mdash; blending design, code and motion to craft digital
+              products people remember.
+            </h2>
+
+            <div class="about__cols">
+              <p class="about__text" data-reveal="lines">
+                For the past 8+ years I&rsquo;ve partnered with startups, agencies and brands to
+                design and build websites that feel alive. My sweet spot is where visual design
+                meets engineering: real-time 3D, fluid motion and interfaces that are as fast as
+                they are beautiful.
+              </p>
+              <ul class="about__facts" data-reveal="stagger">
+                <li><span>Focus</span><strong>Creative development &amp; UI design</strong></li>
+                <li><span>Approach</span><strong>Design-led, detail-obsessed, performance-first</strong></li>
+                <li><span>Collaboration</span><strong>Remote-friendly, worldwide</strong></li>
+                <li><span>Availability</span><strong class="is-available">Freelance &amp; full-time</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="about__visual">
+            <div
+              class="holo"
+              data-holo
+              role="button"
+              tabindex="0"
+              aria-pressed="false"
+              aria-label="Profile card — press to flip"
+              data-cursor="Flip"
+            >
+              <div class="holo__float">
+                <div class="holo__card">
+                  <!-- Front -->
+                  <div class="holo__face holo__front">
+                    <div class="holo__shine"></div>
+                    <div class="holo__glare"></div>
+                    <div class="holo__top">
+                      <span class="holo__brand"><i class="ph ph-cube-transparent"></i> STUDIO.NOVA</span>
+                      <span class="holo__chip" aria-hidden="true"></span>
+                    </div>
+                    <div class="holo__avatar" aria-hidden="true">
+                      <div class="holo__orb"></div>
+                      <i class="ph ph-cube-transparent"></i>
+                    </div>
+                    <div class="holo__name">
+                      <span class="holo__role">Creative Designer</span>
+                      <span class="holo__role">&amp; Developer</span>
+                    </div>
+                    <dl class="holo__meta">
+                      <div><dt>ID</dt><dd>NOVA&#8209;001</dd></div>
+                      <div><dt>Since</dt><dd>2018</dd></div>
+                      <div><dt>Status</dt><dd class="is-available">Available</dd></div>
+                    </dl>
+                    <div class="holo__barcode" aria-hidden="true"></div>
+                  </div>
+                  <!-- Back -->
+                  <div class="holo__face holo__back">
+                    <div class="holo__shine"></div>
+                    <div class="holo__glare"></div>
+                    <p class="holo__back-label">Let&rsquo;s connect</p>
+                    <p class="holo__back-title">Got an idea?<br />Let&rsquo;s make it real.</p>
+                    <a href="mailto:hello@studionova.example" class="holo__back-email">hello@studionova.example</a>
+                    <div class="holo__grid" aria-hidden="true"></div>
+                    <p class="holo__back-foot"><i class="ph ph-globe-hemisphere-west"></i> Working worldwide</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="holo-hint"><i class="ph ph-hand-pointing"></i> Move to tilt &middot; Click to flip</p>
+          </div>
+        </div>
+
+        <div class="skills" aria-label="Tools and technologies">
+          <div class="skills__row" data-direction="-1">
+            <ul class="skills__list">
+              <li>Three.js</li><li>WebGL</li><li>GLSL</li><li>GSAP</li><li>React</li>
+              <li>Next.js</li><li>TypeScript</li><li>Node.js</li><li>Vite</li><li>Web Audio</li>
+            </ul>
+          </div>
+          <div class="skills__row" data-direction="1">
+            <ul class="skills__list skills__list--alt">
+              <li>Figma</li><li>Blender</li><li>Spline</li><li>After Effects</li><li>Framer</li>
+              <li>Tailwind CSS</li><li>Webflow</li><li>Cinema 4D</li><li>Illustrator</li><li>Lottie</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== Services ============================== -->
+      <section class="services" id="services" data-section="services" aria-labelledby="services-title">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow" data-reveal="fade"><span class="eyebrow__num">03</span>Services</p>
+            <h2 class="section-title" id="services-title" data-reveal="chars">
+              What I can<br /><em>do for you</em>
+            </h2>
+            <p class="section-lead" data-reveal="fade">
+              End-to-end creative services &mdash; from the first spark of an idea to a polished,
+              high-performance product.
+            </p>
+          </div>
+
+          <div class="services__stack">
+            <article class="service-card" style="--i: 0; --c1: #8a63f8; --c2: #4de1ff">
+              <div class="service-card__inner">
+                <div class="service-card__content">
+                  <div class="service-card__head">
+                    <span class="service-card__num">01</span>
+                    <i class="ph ph-code service-card__icon" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="service-card__title">Creative Development</h3>
+                  <p class="service-card__desc">
+                    Immersive websites and interactive experiences powered by WebGL, Three.js and
+                    buttery-smooth animation.
+                  </p>
+                  <ul class="service-card__list">
+                    <li>WebGL &amp; Three.js</li>
+                    <li>Interactive 3D</li>
+                    <li>Shaders &amp; effects</li>
+                    <li>Performance tuning</li>
+                  </ul>
+                </div>
+                <div class="service-card__visual" aria-hidden="true">
+                  <div class="sv-cube">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="sv-cube sv-cube--inner">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="sv-floor"></div>
+                </div>
+                <div class="service-card__shade" aria-hidden="true"></div>
+              </div>
+            </article>
+
+            <article class="service-card" style="--i: 1; --c1: #5a8cff; --c2: #c9c3ff">
+              <div class="service-card__inner">
+                <div class="service-card__content">
+                  <div class="service-card__head">
+                    <span class="service-card__num">02</span>
+                    <i class="ph ph-pen-nib service-card__icon" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="service-card__title">UI/UX Design</h3>
+                  <p class="service-card__desc">
+                    Intuitive, beautiful interfaces grounded in research &mdash; from wireframes to
+                    pixel-perfect design systems.
+                  </p>
+                  <ul class="service-card__list">
+                    <li>Product design</li>
+                    <li>Design systems</li>
+                    <li>Prototyping</li>
+                    <li>User research</li>
+                  </ul>
+                </div>
+                <div class="service-card__visual" aria-hidden="true">
+                  <div class="sv-layers">
+                    <div class="sv-layer sv-layer--1"><span></span><span></span><span></span></div>
+                    <div class="sv-layer sv-layer--2"><span></span><span></span></div>
+                    <div class="sv-layer sv-layer--3"><span></span></div>
+                  </div>
+                </div>
+                <div class="service-card__shade" aria-hidden="true"></div>
+              </div>
+            </article>
+
+            <article class="service-card" style="--i: 2; --c1: #ff5fd2; --c2: #8a63f8">
+              <div class="service-card__inner">
+                <div class="service-card__content">
+                  <div class="service-card__head">
+                    <span class="service-card__num">03</span>
+                    <i class="ph ph-wave-sine service-card__icon" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="service-card__title">Motion &amp; Interaction</h3>
+                  <p class="service-card__desc">
+                    Scroll storytelling, micro-interactions and motion systems that guide users and
+                    spark delight.
+                  </p>
+                  <ul class="service-card__list">
+                    <li>Scroll experiences</li>
+                    <li>Micro-interactions</li>
+                    <li>Motion guidelines</li>
+                    <li>Lottie &amp; SVG</li>
+                  </ul>
+                </div>
+                <div class="service-card__visual" aria-hidden="true">
+                  <div class="sv-motion">
+                    <svg class="sv-curve" viewBox="0 0 240 160" fill="none">
+                      <path class="sv-curve__grid" d="M20 140 H220 M20 140 V20" />
+                      <path class="sv-curve__handle" d="M20 140 L110 140 M220 20 L130 20" />
+                      <path class="sv-curve__path" d="M20 140 C110 140 130 20 220 20" />
+                      <circle class="sv-curve__knob" cx="110" cy="140" r="5" />
+                      <circle class="sv-curve__knob" cx="130" cy="20" r="5" />
+                    </svg>
+                    <span class="sv-ball"></span>
+                  </div>
+                </div>
+                <div class="service-card__shade" aria-hidden="true"></div>
+              </div>
+            </article>
+
+            <article class="service-card" style="--i: 3; --c1: #4de1ff; --c2: #ffb46b">
+              <div class="service-card__inner">
+                <div class="service-card__content">
+                  <div class="service-card__head">
+                    <span class="service-card__num">04</span>
+                    <i class="ph ph-sparkle service-card__icon" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="service-card__title">3D &amp; Brand Identity</h3>
+                  <p class="service-card__desc">
+                    Distinctive visual identities and 3D assets that make your brand impossible to
+                    ignore.
+                  </p>
+                  <ul class="service-card__list">
+                    <li>Visual identity</li>
+                    <li>3D modelling</li>
+                    <li>Art direction</li>
+                    <li>Brand guidelines</li>
+                  </ul>
+                </div>
+                <div class="service-card__visual" aria-hidden="true">
+                  <div class="sv-planet">
+                    <div class="sv-planet__core"></div>
+                    <div class="sv-planet__ring sv-planet__ring--1"><span></span></div>
+                    <div class="sv-planet__ring sv-planet__ring--2"><span></span></div>
+                  </div>
+                </div>
+                <div class="service-card__shade" aria-hidden="true"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== Marquee ============================== -->
+      <section class="marquee-band" aria-hidden="true">
+        <div class="marquee">
+          <div class="marquee__inner">
+            <span>Let&rsquo;s create</span><i class="ph ph-sparkle"></i>
+            <span class="is-outline">something</span><i class="ph ph-sparkle"></i>
+            <span>unforgettable</span><i class="ph ph-sparkle"></i>
+            <span class="is-outline">together</span><i class="ph ph-sparkle"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== Contact ============================== -->
+      <section class="contact" id="contact" data-section="contact" aria-labelledby="contact-title">
+        <div class="container contact__grid">
+          <div class="contact__intro">
+            <p class="eyebrow" data-reveal="fade"><span class="eyebrow__num">04</span>Contact</p>
+            <h2 class="contact__title" id="contact-title" data-reveal="chars">
+              Let&rsquo;s build something <em>unforgettable.</em>
+            </h2>
+            <p class="contact__lead" data-reveal="fade">
+              Have a project in mind, a wild idea, or just want to say hi? Drop me a line &mdash; I
+              usually reply within 24 hours.
+            </p>
+
+            <!-- Replace hello@studionova.example everywhere in this file with your real address -->
+            <div class="contact__email-row" data-reveal="fade">
+              <a href="mailto:hello@studionova.example" class="contact__email" data-email data-magnetic>
+                <span>hello@studionova.example</span>
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+              <button type="button" class="copy-btn" data-copy aria-label="Copy email address">
+                <i class="ph ph-copy" aria-hidden="true"></i><span>Copy</span>
+              </button>
+            </div>
+
+            <div class="contact__details" data-reveal="stagger">
+              <div class="availability-card glass">
+                <span class="pulse-dot" aria-hidden="true"></span>
+                <div class="availability-text">
+                  <p class="availability-title">Available for Work</p>
+                  <p class="availability-sub">Booking new projects now</p>
+                </div>
+              </div>
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="GitHub" data-magnetic><i class="ph ph-github-logo"></i></a>
+                <a href="#" class="social-link" aria-label="LinkedIn" data-magnetic><i class="ph ph-linkedin-logo"></i></a>
+                <a href="#" class="social-link" aria-label="X / Twitter" data-magnetic><i class="ph ph-x-logo"></i></a>
+                <a href="#" class="social-link" aria-label="Dribbble" data-magnetic><i class="ph ph-dribbble-logo"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-form" novalidate data-reveal="fade">
+            <div class="contact-form__glow" aria-hidden="true"></div>
+            <div class="field">
+              <input id="cf-name" name="name" type="text" autocomplete="name" required placeholder=" " />
+              <label for="cf-name">Your name</label>
+              <span class="field__error" aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <input id="cf-email" name="email" type="email" autocomplete="email" required placeholder=" " />
+              <label for="cf-email">Email address</label>
+              <span class="field__error" aria-live="polite"></span>
+            </div>
+
+            <fieldset class="chips">
+              <legend>I&rsquo;m interested in</legend>
+              <label class="chip"><input type="checkbox" name="interest" value="Website" /><span>Website</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="WebGL / 3D" /><span>WebGL / 3D</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="UI/UX Design" /><span>UI/UX Design</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="Motion" /><span>Motion</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="Branding" /><span>Branding</span></label>
+            </fieldset>
+
+            <fieldset class="chips">
+              <legend>Budget</legend>
+              <label class="chip"><input type="radio" name="budget" value="< $5k" /><span>&lt; $5k</span></label>
+              <label class="chip"><input type="radio" name="budget" value="$5k – $15k" /><span>$5k &ndash; $15k</span></label>
+              <label class="chip"><input type="radio" name="budget" value="$15k – $40k" /><span>$15k &ndash; $40k</span></label>
+              <label class="chip"><input type="radio" name="budget" value="$40k+" /><span>$40k+</span></label>
+            </fieldset>
+
+            <div class="field">
+              <textarea id="cf-message" name="message" rows="4" required placeholder=" "></textarea>
+              <label for="cf-message">Tell me about your project</label>
+              <span class="field__error" aria-live="polite"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-submit" data-magnetic>
+              <span class="btn__text" data-text="Send Message"><span>Send Message</span></span>
+              <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+            </button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================== Footer ============================== -->
+    <footer class="site-footer">
+      <div class="container footer__top">
+        <div class="footer__cta">
+          <p class="footer__kicker">Have an idea in mind?</p>
+          <a href="#contact" class="footer__big-link" data-magnetic>
+            Let&rsquo;s talk <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <nav class="footer__nav" aria-label="Footer">
+          <p class="footer__heading">Menu</p>
+          <a href="#home">Home</a>
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="footer__nav">
+          <p class="footer__heading">Socials</p>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">X / Twitter</a>
+          <a href="#">Dribbble</a>
+        </div>
+      </div>
+
+      <div class="footer__wordmark" aria-hidden="true">
+        <span class="fw-text">STUDIO.NOVA</span>
+      </div>
+
+      <div class="container footer__bottom">
+        <p>&copy; <span class="js-year">2026</span> STUDIO.NOVA. All rights reserved.</p>
+        <p class="footer__credit">Crafted with Three.js, GSAP &amp; Lenis</p>
+        <button type="button" class="back-to-top" data-magnetic aria-label="Back to top">
+          <i class="ph ph-arrow-up" aria-hidden="true"></i>
+        </button>
+      </div>
+    </footer>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
